@@ -4,13 +4,16 @@ const port = 3000;
 var bodyParser = require('body-parser')
 // const tf = require('@tensorflow/tfjs-node');
 // const posenet = require('@tensorflow-models/posenet');
+// const imageScaleFactor = 0.5;
+// const outputStride = 16;
+// const flipHorizontal = false;
 // const { createCanvas, loadImage } = require('canvas')
 // const canvas = createCanvas(640, 360)
 // const ctx = canvas.getContext('2d')
 const cosinePairs=[[[11,13],[13,15]],[[5,11],[11,13]],[[5,11],[5,7]],[[5,7],[7,9]],[[6,8],[8,10]],[[6,12],[6,8]],[[12,14],[14,16]],[[6,12],[12,14]]];
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
  
-app.use(bodyParser.json({limit: '50mb', extended: true}))
+app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 app.use(express.static('./public'));
 
@@ -23,48 +26,47 @@ app.get('/input',(req,res)=>{
   res.render("input");
 })
 
-app.post('/model_image', async function (req, res) {
-  const imageString = req.body.imgString;
-  const data = Buffer.from(imageString, 'base64')
-  const t = tf.node.decodeImage(data)
+// app.post('/model_image', async function (req, res) {
+//   const imageString = req.body.imgString;
+//   const data = Buffer.from(imageString, 'base64')
+//   const t = tf.node.decodeImage(data)
 
-  posenet.load().then((net)=>{
-        net.estimateSinglePose(t, {
-          architecture: 'ResNet50',
-          outputStride: 16,
-          quantBytes: 2,
-          inputResolution: 500,
-          multiplier:1,
-          }).then((pose)=>{res.send(pose)})
+//   posenet.load().then((net)=>{
+//         net.estimateSinglePose(t, {
+//           architecture: 'ResNet50',
+//           outputStride: 16,
+//           quantBytes: 2,
+//           inputResolution: 500,
+//           multiplier:1,
+//           }).then((pose)=>{res.send(pose)})
 
-})
-});
+// })
+// });
 
-app.post("/user_image",function(req,res){
-  const imageString = req.body.imgString;
-  const modelObject = JSON.parse(req.body.modelPose);
-  imgcos = cosLines(modelObject);
-  const data = Buffer.from(imageString, 'base64')
-  const t = tf.node.decodeImage(data)
+// app.post("/user_image",function(req,res){
+//   const imageString = req.body.imgString;
+//   const modelObject = JSON.parse(req.body.modelPose);
+//   imgcos = cosLines(modelObject);
+//   const data = Buffer.from(imageString, 'base64')
+//   const t = tf.node.decodeImage(data)
 
-  posenet.load().then((net)=>{
-        net.estimateSinglePose(t, {
-          architecture: 'ResNet50',
-          outputStride: 16,
-          quantBytes: 2,
-          inputResolution: 500,
-          multiplier:1,
-          }).then((pose)=>{
-            videocos = cosLines(pose);
-            let ans = compareCos(imgcos,videocos);
-            let message = displayMessage(ans);
+//   posenet.load().then((net)=>{
+//         net.estimateSinglePose(t, {
+//           architecture: 'ResNet50',
+//           outputStride: 16,
+//           quantBytes: 2,
+//           inputResolution: 500,
+//           multiplier:1,
+//           }).then((pose)=>{
+//             videocos = cosLines(pose);
+//             let ans = compareCos(imgcos,videocos);
+//             let message = displayMessage(ans);
             
-            res.send(message);
-         })
+//             res.send(message);
+//          })
 
-})
-})
-
+// })
+// })
 
 // app.post("/faceRecognize",(req,res)=>{
 //   loadImage(`${req.body.imgString}`).then((image)=>{
@@ -83,9 +85,9 @@ app.post("/user_image",function(req,res){
 //       predictions.array().then(ar=>{res.send(ar)})
 //     });
 //   })
-//   // const imageString = req.body.imgString;
-//   // const data = Buffer.from(imageString, 'base64')
-//   // const t = tf.node.decodeImage(data)
+  // const imageString = req.body.imgString;
+  // const data = Buffer.from(imageString, 'base64')
+  // const t = tf.node.decodeImage(data)
   
   
 // })
@@ -95,7 +97,7 @@ app.listen(port, () => {
   })
 
   function cosLines(pose){
-    var invtanVals=[];
+    var cosVals=[];
   for(let i=0;i<=7;i++){
     var slope=new Array();
     for(let j=0;j<=1;j++){
@@ -110,12 +112,11 @@ app.listen(port, () => {
       }
       //console.log(slope);
   }
-  if(slope[0]*slope[1]!=-1){tan=(slope[0]-slope[1])/(1-slope[0]*slope[1]);
-      //cos=1/(Math.sqrt(1+tan*tan));
-      invtan=Math.atan(tan)
-      invtanVals.push(invtan);}
+  if(slope[0]*slope[1]!=-1){tan=Math.abs(slope[0]-slope[1])/(1-slope[0]*slope[1]);
+      cos=1/(Math.sqrt(1+tan*tan));
+      cosVals.push(cos);}
   }
-  return invtanVals;
+  return cosVals;
   }
   
   function compareCos(imgcos,vidcos){
@@ -131,8 +132,8 @@ app.listen(port, () => {
       for(let i=0;i<=7;i++){
           
           if(vidcos[i]!=NaN){
-              lowLimit=imgcos[i]-0.4
-              upLimit=imgcos[i]+0.4
+              lowLimit=imgcos[i]-0.1
+              upLimit=imgcos[i]+0.1
               if(i==0){
                   if(vidcos[0]>lowLimit && vidcos[0]<upLimit){ans[i]="left leg is correct";}
                   else if(vidcos[0]<lowLimit){ans[i]="try bending your left knee a little";}
@@ -153,14 +154,14 @@ app.listen(port, () => {
               }
               if(i==3){
                   if(vidcos[3]>lowLimit && vidcos[3]<upLimit){ans[i]="left arm alignment is correct";}
-                  else if(vidcos[3]<lowLimit){ans[i]="try straightening your left arm";}
-                  else if(vidcos[3]>upLimit){ans[i]="try bending your left arm";}
+                  else if(vidcos[3]<lowLimit){ans[i]="try bending your left elbow";}
+                  else if(vidcos[3]>upLimit){ans[i]="try straightening your left arm";}
                   else{ans[i]="undetected"};
               }
               if(i==4){
                   if(vidcos[4]>lowLimit && vidcos[4]<upLimit){ans[i]="right arm alignment is correct";}
-                  else if(vidcos[4]<lowLimit){ans[i]="try straightening your right arm";}
-                  else if(vidcos[4]>upLimit){ans[i]="try bending your right arm";}
+                  else if(vidcos[4]<lowLimit){ans[i]="try bending your right elbow";}
+                  else if(vidcos[4]>upLimit){ans[i]="try straightening your right arm";}
                   else{ans[i]="undetected"};
               }
               if(i==5){

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+    <link rel="stylesheet" href="/stylesheet/input.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+    <title>SayCheese.io</title>
+</head>
+<body>
+    <div>
+        <div class="scroll-indicator" id="section01" data-scroll-indicator-title="SayCheese"></div>
+    </div>
+    <section id="section1">
+        
+            <h1>SayCheese.io</h1>
+            <p>Step up your social media game using AI trained application that helps you pose for insta-worthy pictures.</p>
+        
+    </section>
+    <div>
+        <div class="scroll-indicator" id="section02" data-scroll-indicator-title="Upload Image"></div>
+    </div>
+    <section id="section2">
+        <video autoplay style="display: none;"></video>
+        <div class="image_input">
+            <span>Upload your reference image:</span> 
+            <br>
+            <br>
+            <input type="file" accept="image/*" id="image" />
+            <figure id="imageCanvas"></figure>
+        </div>
+    </section>
+    <div>
+        <div class="scroll-indicator" id="section03" data-scroll-indicator-title="Video Interface"></div>
+    </div>
+    <section id="section3" style="padding: 0;">
+        <div style="display: flex;">
+            <div>
+                <button onclick="takeVideoInput()">Open Video</button>
+                <button onclick="closeVideoInput()">Close Video</button>
+                <canvas style="display: none;" id="videoCanvas"></canvas>
+                <p id="message"></p>
+                <p id="undetected"></p>
+                <button onclick="startTracking()">Start Tracing</button>
+                <button onclick="">Face capture</button>
+                <button onclick="stopTracking()">Stop Tracing</button>
+                <ul id="corrected"></ul>
+            </div>
+            <div>
+                <canvas id="download"></canvas>
+                <a href="" download="FILENAME.jpg" id="link"><button>download</button></a>
+            </div>
+        </div>
+        
+        
+    </section>
+    <div>
+        <div class="scroll-indicator" id="section04" data-scroll-indicator-title="Inspiration Board"></div>
+    </div>
+    <section id="section4">
+        <macro-carousel navigation>
+            
+            <article class="slide">
+                <img src="https://images.unsplash.com/photo-1611771707478-4a6d30be6c97?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1900&q=80"></img>
+            </article>
+            <article class="slide">
+                <img src="https://images.unsplash.com/photo-1573935167748-cd289d8fd793?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"></img>
+            </article>
+            <article class="slide">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"></img>
+            </article>
+            <article class="slide">
+                <img src="https://images.unsplash.com/photo-1502323777036-f29e3972d82f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"></img>
+            </article>
+            <article class="slide">
+                <img src="https://s3.amazonaws.com/pixpa.com/com/articles/1566285406-11234-model-poses6jpg.png"></img>
+            </article>
+            <article class="slide">
+                <img src="https://s1.1zoom.me/big0/798/Kendall_Jenner_Pose_Sitting_Brunette_girl_Model_571781_1280x853.jpg"></img>
+            </article>
+            <article class="slide">
+                <img src="https://www.photoblog.com/learn/wp-content/uploads/2018/10/Model-Sitting-1024x683.jpg"></img>
+            </article>
+            
+          </macro-carousel>
+        
+    </section>
+    <div>
+        <div class="scroll-indicator" id="section05" data-scroll-indicator-title="Caption Suggester"></div>
+    </div>
+    <section id="section5">
+        <h2>What do you want the caption to be about?</h2>
+        <input type="text" name="search" placeholder="Search..">
+        <button type="submit" onclick="serchdict()">Search</button>
+        <ul id="captionList"></ul>
+    </section>
+    
+    
+    
+    <div class=circle1></div>
+    <div class=circle2></div>
+    <div class=circle3></div>
+    <div class=circle4></div>
+    <div class=circle5></div>
+    <div class=circle6></div>
+    <div class=hollowcircle></div>
+    <script src="/javascript/dot-nav-min.js"></script>
+    <script src="/javascript/carousal.js"></script>
+    <script src="/javascript/input.js" type="text/javascript"></script>
+</body>
+</html>

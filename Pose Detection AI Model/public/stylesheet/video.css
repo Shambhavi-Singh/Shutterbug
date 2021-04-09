@@ -1,0 +1,17 @@
+body{
+    background-color: rgb(29, 206, 167);
+}
+
+video{
+    transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
+    width: 640px;
+    height:360px;
+    visibility:hidden;
+    position:absolute;
+}
+
+canvas{
+    overflow: hidden;
+}

@@ -1,0 +1,247 @@
+body{
+    margin:0;
+    background:white;
+    color: palevioletred;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+h1{
+  font-size: 50px;
+    color: salmon;
+}
+#section1 p{
+  font-size: 25px;
+  max-width:60vw;
+}
+p{
+  font-size: 15px;
+  
+}
+button{
+    padding: 4px;
+    border-radius: 5%;
+    background-color: thistle;
+    margin: 8px;
+    
+}
+button:hover{
+    box-shadow: 2px 2px rgb(177, 95, 177);
+}
+.image_input button{
+    background-color: pink;
+}
+#section5 input[type=text] {
+  width: 130px;
+  height: 23px;
+  border: 1.3px solid rgb(206, 68, 114);
+  border-radius: 5%;
+  
+}
+#section5 input[type=text]:hover{
+  box-shadow: 2px 2px 0 0 palevioletred;
+}
+
+#section5 input[type=text]:focus {
+ 
+  box-shadow: 3px 3px 0 0 palevioletred;
+}
+
+.circle1{
+    display:block;
+    left:83%;
+    border-radius: 50%;
+    background-color: palevioletred;
+    position:absolute;
+    width:83vh;
+    height:100vh;
+    z-index: -1;
+    overflow-x: hidden;
+    top:0;
+}
+.circle2{
+    display:block;
+    left:79%;
+    border-radius: 50%;
+    background-color: rgb(216, 112, 147,0.5);
+    position:absolute;
+    width:88vh;
+    height:100vh;
+    z-index: -1;
+    overflow-x: hidden;
+    top:0;
+}
+.circle3{
+    display:block;
+    left:75%;
+    border-radius: 50%;
+    background-color: rgb(216, 112, 147,0.5);
+    position:absolute;
+    width:93vh;
+    height:100vh;
+    z-index: -1;
+    overflow-x: hidden;
+    top:0;
+}
+.circle4{
+    display:block;
+    left:71%;
+    border-radius: 50%;
+    background-color: rgb(216, 112, 147,0.5);
+    position:absolute;
+    width:98vh;
+    height:100vh;
+    z-index: -1;
+    overflow-x: hidden;
+    top:0;
+}
+.circle5{
+    display:block;
+    left:67%;
+    top:0;
+    border-radius: 50%;
+    background-color: rgb(216, 112, 147,0.3);
+    position:absolute;
+    width:103vh;
+    height:100vh;
+    z-index: -1;
+    overflow-x: hidden;
+}
+.circle6{
+    display:block;
+    left:63%;
+    top:0;
+    border-radius: 50%;
+    background-color: rgb(216, 112, 147,0.15);
+    position:absolute;
+    width:108vh;
+    height:100vh;
+    z-index: -1;
+    overflow-x: hidden;
+}
+.hollowcircle{
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    left: 10px;
+    top:3%;
+    border-radius: 50%;
+    border: 17px solid palevioletred ;
+    box-sizing: border-box;
+}
+
+section{
+  height:100vh;
+  width:100vw;
+  padding:5.5%;
+}
+#section1{
+  padding-top: 160px;
+}
+#section2{
+  color: rgb(165, 45, 165);
+  background-color: thistle;;
+}
+#section2 span{
+  font-size: 25px;
+}
+#section4{
+  background-color: thistle;;
+}
+#section2 img{
+  
+  height:65vh;
+  
+}
+#section4 img{
+  width: 70vw;
+  height:80vh;
+  object-fit: cover;
+}
+.scroll-indicator-controller {
+    position: fixed;
+    top: 50vh;
+    transform: translate(0, -50%);
+    right: 10px;
+    z-index: 999;
+  }
+  .scroll-indicator-controller.indi-mobile > div span {
+    display: none;
+  }
+  @media (min-width: 1025px) {
+    .scroll-indicator-controller {
+      right: 20px;
+    }
+  }
+  .scroll-indicator-controller > div {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    border-radius: 50%;
+    border: 1px solid rgb(80, 58, 80);
+    background: rgba(0, 0, 0, 0.05);
+    margin: 0 0 10px 0;
+    cursor: pointer;
+    transition: background 0.4s ease;
+    will-change: transition;
+  }
+  .scroll-indicator-controller > div span {
+    color: rgb(219, 5, 112);
+    position: absolute;
+    right: calc(100% + 8px);
+    white-space: nowrap;
+    top: 50%;
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    line-height: 17px;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-50%) translateX(10px);
+    transition: all 0.4s ease;
+    will-change: transition;
+  }
+  @media (hover: none) {
+    .scroll-indicator-controller > div span {
+      display: none;
+    }
+  }
+  .scroll-indicator-controller > div span:after {
+    content: "-----";
+    padding-left: 5px;
+    letter-spacing: -2px;
+    font-family: arial, sans-serif;
+    vertical-align: text-top;
+    line-height: 14px;
+  }
+  @media (hover: hover), (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .scroll-indicator-controller > div:hover span {
+      width: auto;
+      opacity: 1;
+      overflow: visible;
+      transform: translateY(-50%) translateX(0px);
+    }
+  }
+  .scroll-indicator-controller > div.active {
+    background: #c5406d;
+    border-color: rgba(0, 0, 0, 0.25);
+  }
+  @supports (-ms-ime-align:auto) {
+    .scroll-indicator-controller > div span {
+      transition: opacity 0.4s ease;
+    }
+  }
+
+  macro-carousel {
+    height: 75vh;
+    width:80vw;
+  }
+
+  .slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, .05);
+    color: white;
+    
+  }
