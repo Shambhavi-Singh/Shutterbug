@@ -1,21 +1,50 @@
-const label_map = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+const label_map = ['Anger', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'confident']
 const video = document.querySelector("video");
+const face = document.getElementById("face");
 video.srcObject= null;
 const canvas = document.getElementById("videoCanvas");
 const download = document.getElementById("download");
+const image_input_canvas = document.getElementById("image_output");
 const inputImageDisplay = document.getElementById("imageCanvas");
 const ctx = canvas.getContext("2d");
-const dtx = download.getContext("2d")
+const dtx = download.getContext("2d");
+const iitx = image_input_canvas.getContext("2d");
 let draw_interval = null;
 let capture_interval = null;
 let flag=1;
-let point=0;
 const link = document.getElementById("link");
 const message = document.getElementById("message");
 const undetected = document.getElementById("undetected");
 const corrected = document.getElementById("corrected");
 var cosinePairs=[[[11,13],[13,15]],[[5,11],[11,13]],[[5,11],[5,7]],[[5,7],[7,9]],[[6,8],[8,10]],[[6,12],[6,8]],[[12,14],[14,16]],[[6,12],[12,14]]];
 const captionList = document.getElementById("captionList");
+//iitx properties
+
+//function to create a skeleton of input image:
+const pair_to_connect = [[5,6],[5,7],[7,9],[6,8],[8,10],[5,11],[6,12],[11,13],[12,14],[13,15],[14,16],[11,12]]
+function createSketeton(pose){
+    image_input_canvas.width = inputImageDisplay.clientWidth;
+    image_input_canvas.height = inputImageDisplay.clientHeight;
+    
+    iitx.clearRect(0,0,image_input_canvas.width,image_input_canvas.height)
+    iitx.fillStyle = "black";
+    iitx.fillRect(0, 0, image_input_canvas.width, image_input_canvas.height);
+    const keypoints = pose.keypoints;
+    iitx.beginPath();
+    pair_to_connect.forEach(element =>{
+        iitx.moveTo(keypoints[element[0]].position.x,keypoints[element[0]].position.y);
+        iitx.lineTo(keypoints[element[1]].position.x,keypoints[element[1]].position.y)
+    })
+    iitx.strokeStyle = "white";
+    iitx.stroke();
+    for(let i=5;i<17;i++){
+        iitx.beginPath();
+        iitx.arc(keypoints[i].position.x,keypoints[i].position.y,5,0,2*Math.PI);
+        iitx.fillStyle = "#11ede6";
+        iitx.fill();
+    }
+    
+}
 function cosLines(pose){
   var cosVals=[];
 for(let i=0;i<=7;i++){
@@ -172,7 +201,7 @@ async function detectPose(imageElement){
         inputResolution: 720,
         multiplier:1,
         });
-        
+        createSketeton(pose);
         window.cosValsImg=cosLines(pose);
 }
 
