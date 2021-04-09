@@ -18,6 +18,7 @@ const undetected = document.getElementById("undetected");
 const corrected = document.getElementById("corrected");
 var cosinePairs=[[[11,13],[13,15]],[[5,11],[11,13]],[[5,11],[5,7]],[[5,7],[7,9]],[[6,8],[8,10]],[[6,12],[6,8]],[[12,14],[14,16]],[[6,12],[12,14]]];
 const captionList = document.getElementById("captionList");
+const audioDiv = document.getElementById("audioFile");
 //iitx properties
 
 //function to create a skeleton of input image:
@@ -202,6 +203,7 @@ async function detectPose(imageElement){
         multiplier:1,
         });
         createSketeton(pose);
+        outputAudio();
         window.cosValsImg=cosLines(pose);
 }
 
@@ -343,3 +345,13 @@ easyScrollDots({
     .then(res=>{console.log(res)})
     .catch(error => console.log(error))
   }
+
+function outputAudio(){
+    audioDiv.innerHTML="";
+    let audio = document.createElement("audio");
+    audio.autoplay="true";
+    audio.src="/audio/demo.mp3";
+    audio.loop = false;
+    console.log(audio);
+    audioDiv.appendChild(audio);
+}
