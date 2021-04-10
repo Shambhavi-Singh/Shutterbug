@@ -132,18 +132,19 @@ function compareCos(imgcos,vidcos){
             //     else if(vidcos[7]<lowLimit){ans[i]="try bending your right thigh towards body";}
             //     else if(vidcos[7]>upLimit){ans[i]="try moving your right thigh away from body";}
             //     else{ans[i]="undetected"};
-            }
+            // }
             if(ans[i] && ans[i].split(" ").includes("correct")){
                 count=count+1;
             }
       }else{
-        ans[i]="image not clear in this area"
+        ans[i]="image not clear in this area";
     }
 }
     console.log(ans);
-    if(count==7){console.log("Your complete posture is correct in this frame.");}
-    displayMessage(ans);
-}
+    if(count==7){
+        console.log("Your complete posture is correct in this frame.");}
+        displayMessage(ans);
+};
 
 function displayMessage(ans){
     corrected.innerHTML="";
