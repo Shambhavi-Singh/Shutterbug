@@ -22,6 +22,7 @@ const audioDiv = document.getElementById("audioFile");
 //flag control for skeleton
 let flag_skeleton = false;
 //object for audio files:
+let audioTimeout = 0;
 let audioFlag = false;
 let point=0;
 const audioSelect = {left:
@@ -195,7 +196,7 @@ function displayMessage(ans){
             if(!audioFlag){
                 outputAudio(element);
                 audioFlag = true;
-                setTimeout(()=>{audioFlag=false},5000);
+                audioTimeout = setTimeout(()=>{audioFlag=false},5000);
             }
             
             return false;
@@ -215,6 +216,10 @@ function displayMessage(ans){
         if(point>20){
             capture();
             perfectAudio("Perfect.mp3");
+            clearTimeout(audioTimeout);
+            setTimeout(()=>{audioFlag=false},10000);
+            audioFlag=true;
+
             point=0;
         }
         
