@@ -222,7 +222,8 @@ document.getElementById('image').onchange =async function (evt) {
         var fr = new FileReader();
         fr.onload = function () {
             outImage.src = fr.result;
-            facialExpression(fr.result);
+            //facialExpression(fr.result);
+            inputImageDisplay.innerHTML = "";
             inputImageDisplay.appendChild(outImage);
             detectPose(outImage);
         }
