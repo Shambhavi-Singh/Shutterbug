@@ -16,7 +16,7 @@ const link = document.getElementById("link");
 const message = document.getElementById("message");
 const undetected = document.getElementById("undetected");
 const corrected = document.getElementById("corrected");
-var cosinePairs=[[[11,13],[13,15]],[[5,11],[11,13]],[[5,11],[5,7]],[[5,7],[7,9]],[[6,8],[8,10]],[[6,12],[6,8]],[[12,14],[14,16]],[[6,12],[12,14]]];
+var cosinePairs=[[[11,13],[13,15]],[[12,14],[14,16]],[[7,5],[5,11]],[[12,6],[6,8]],[[5,7],[7,9]],[[6,8],[8,10]],[[3,4],[5,6]]];
 const captionList = document.getElementById("captionList");
 const audioDiv = document.getElementById("audioFile");
 //iitx properties
@@ -80,58 +80,58 @@ function compareCos(imgcos,vidcos){
     var count=0;
     var flag=0;
     console.log(imgcos)
-    for(let i=0;i<=7;i++){
+    for(let i=0;i<=5;i++){
         
         if(vidcos[i]!=NaN){
-            lowLimit=imgcos[i]-0.1
-            upLimit=imgcos[i]+0.1
+            lowLimit=imgcos[i]-0.4
+            upLimit=imgcos[i]+0.4
             if(i==0){
                 if(vidcos[0]>lowLimit && vidcos[0]<upLimit){ans[i]="left leg is correct";}
-                else if(vidcos[0]<lowLimit){ans[i]="try bending your left knee a little";}
-                else if(vidcos[0]>upLimit){ans[i]="try straightening your left leg a little";}
+                else if(vidcos[0]<lowLimit){ans[i]="try straightening your left leg";}
+                else if(vidcos[0]>upLimit){ans[i]="try bending your left leg";}
                 else{ans[i]="undetected"};
             }
             if(i==1){
-                if(vidcos[1]>lowLimit && vidcos[1]<upLimit){ans[i]="torso alignment is correct";}
-                else if(vidcos[1]<lowLimit){ans[i]="try bending your left thigh towards body";}
-                else if(vidcos[1]>upLimit){ans[i]="try straightening your left thigh away from body";}
+                if(vidcos[1]>lowLimit && vidcos[1]<upLimit){ans[i]="right leg is correct";}
+                else if(vidcos[1]<lowLimit){ans[i]="try straightening your right leg";}
+                else if(vidcos[1]>upLimit){ans[i]="try bending your right leg";}
                 else{ans[i]="undetected"};
             }
             if(i==2){
                 if(vidcos[2]>lowLimit && vidcos[2]<upLimit){ans[i]="left arm position is correct";}
-                else if(vidcos[2]<lowLimit){ans[i]="try moving your left arm towards body";}
-                else if(vidcos[2]>upLimit){ans[i]="try moving your left arm away from body";}
+                else if(vidcos[2]<lowLimit){ans[i]="try moving your left arm away from body";}
+                else if(vidcos[2]>upLimit){ans[i]="try moving your left arm towards body";}
                 else{ans[i]="undetected"};
             }
             if(i==3){
-                if(vidcos[3]>lowLimit && vidcos[3]<upLimit){ans[i]="left arm alignment is correct";}
-                else if(vidcos[3]<lowLimit){ans[i]="try bending your left elbow";}
-                else if(vidcos[3]>upLimit){ans[i]="try straightening your left arm";}
+                if(vidcos[3]>lowLimit && vidcos[3]<upLimit){ans[i]="right arm position is correct";}
+                else if(vidcos[3]<lowLimit){ans[i]="try moving your right arm away from body";}
+                else if(vidcos[3]>upLimit){ans[i]="try moving your right arm towards body";}
                 else{ans[i]="undetected"};
             }
             if(i==4){
-                if(vidcos[4]>lowLimit && vidcos[4]<upLimit){ans[i]="right arm alignment is correct";}
-                else if(vidcos[4]<lowLimit){ans[i]="try bending your right elbow";}
-                else if(vidcos[4]>upLimit){ans[i]="try straightening your right arm";}
+                if(vidcos[4]>lowLimit && vidcos[4]<upLimit){ans[i]="left arm alignment is correct";}
+                else if(vidcos[4]<lowLimit){ans[i]="try straightening your left arm";}
+                else if(vidcos[4]>upLimit){ans[i]="try bending your left arm";}
                 else{ans[i]="undetected"};
             }
             if(i==5){
-                if(vidcos[5]>lowLimit && vidcos[5]<upLimit){ans[i]="right arm position is correct";}
-                else if(vidcos[5]<lowLimit){ans[i]="try moving your right arm towards body";}
-                else if(vidcos[5]>upLimit){ans[i]="try moving your right arm away from body";}
+                if(vidcos[5]>lowLimit && vidcos[5]<upLimit){ans[i]="right arm alignment is correct";}
+                else if(vidcos[5]<lowLimit){ans[i]="try straightening your right arm";}
+                else if(vidcos[5]>upLimit){ans[i]="try bending your right elbow";}
                 else{ans[i]="undetected"};
             }
             if(i==6){
-                if(vidcos[6]>lowLimit && vidcos[6]<upLimit){ans[i]="right leg is correct";}
-                else if(vidcos[6]<lowLimit){ans[i]="try bending your right knee a little";}
-                else if(vidcos[6]>upLimit){ans[i]="try straightening your right leg a little";}
+                if(vidcos[6]>lowLimit && vidcos[6]<upLimit){ans[i]="face  is correct";}
+                else if(vidcos[6]<lowLimit){ans[i]="face left";}
+                else if(vidcos[6]>upLimit){ans[i]="face right";}
                 else{ans[i]="undetected"};
             }
-            if(i==7){
-                if(vidcos[7]>lowLimit && vidcos[7]<upLimit){ans[i]="right leg angle from body is correct";}
-                else if(vidcos[7]<lowLimit){ans[i]="try bending your right thigh towards body";}
-                else if(vidcos[7]>upLimit){ans[i]="try moving your right thigh away from body";}
-                else{ans[i]="undetected"};
+            // if(i==7){
+            //     if(vidcos[7]>lowLimit && vidcos[7]<upLimit){ans[i]="right leg angle from body is correct";}
+            //     else if(vidcos[7]<lowLimit){ans[i]="try bending your right thigh towards body";}
+            //     else if(vidcos[7]>upLimit){ans[i]="try moving your right thigh away from body";}
+            //     else{ans[i]="undetected"};
             }
             if(ans[i] && ans[i].split(" ").includes("correct")){
                 count=count+1;
@@ -141,7 +141,7 @@ function compareCos(imgcos,vidcos){
     }
 }
     console.log(ans);
-    if(count==8){console.log("Your complete posture is correct in this frame.");}
+    if(count==7){console.log("Your complete posture is correct in this frame.");}
     displayMessage(ans);
 }
 
@@ -171,7 +171,7 @@ function displayMessage(ans){
         return true;
         
     });
-    if(flag==0 && ans.length==8){
+    if(flag==0 && ans.length==7){
         message.innerHTML = "perfect";
         point++;
         if(point>20){
