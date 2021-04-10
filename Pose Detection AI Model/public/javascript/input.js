@@ -19,6 +19,8 @@ const corrected = document.getElementById("corrected");
 var cosinePairs=[[[11,13],[13,15]],[[12,14],[14,16]],[[7,5],[5,11]],[[12,6],[6,8]],[[5,7],[7,9]],[[6,8],[8,10]],[[3,4],[5,6]]];
 const captionList = document.getElementById("captionList");
 const audioDiv = document.getElementById("audioFile");
+//flag control for skeleton
+let flag_skeleton = false;
 //object for audio files:
 let audioFlag = false;
 let point=0;
@@ -212,6 +214,7 @@ function displayMessage(ans){
         point++;
         if(point>20){
             capture();
+            perfectAudio("Perfect.mp3");
             point=0;
         }
         
@@ -323,24 +326,27 @@ async function startTracking(){
                     // ctx.arc(640-pose.keypoints[0].position.x,pose.keypoints[0].position.y,3,0,2*Math.PI);
                     // ctx.stroke();
                     const keypoints = pose.keypoints;
-                    ctx.beginPath();
-                    pair_to_connect.forEach(element =>{
-                        if(keypoints[element[0]].score>0.7 && keypoints[element[1]].score>0.7){
-                            ctx.moveTo(640-keypoints[element[0]].position.x,keypoints[element[0]].position.y);
-                            ctx.lineTo(640-keypoints[element[1]].position.x,keypoints[element[1]].position.y)
+                    if(flag_skeleton){
+                        ctx.beginPath();
+                        pair_to_connect.forEach(element =>{
+                            if(keypoints[element[0]].score>0.7 && keypoints[element[1]].score>0.7){
+                                ctx.moveTo(640-keypoints[element[0]].position.x,keypoints[element[0]].position.y);
+                                ctx.lineTo(640-keypoints[element[1]].position.x,keypoints[element[1]].position.y)
+                            }
+                        })
+                        ctx.strokeStyle = "white";
+                        ctx.stroke();
+                        for(let i=5;i<17;i++){
+                            if(keypoints[i].score>0.7 && keypoints[i].score>0.7){
+                                ctx.beginPath();
+                                ctx.arc(640-keypoints[i].position.x,keypoints[i].position.y,5,0,2*Math.PI);
+                                ctx.fillStyle = "#11ede6";
+                                ctx.fill();
+                            }
+                            
                         }
-                    })
-                    ctx.strokeStyle = "white";
-                    ctx.stroke();
-                    for(let i=5;i<17;i++){
-                        if(keypoints[i].score>0.7 && keypoints[i].score>0.7){
-                            ctx.beginPath();
-                            ctx.arc(640-keypoints[i].position.x,keypoints[i].position.y,5,0,2*Math.PI);
-                            ctx.fillStyle = "#11ede6";
-                            ctx.fill();
-                        }
-                        
                     }
+                    
             }
         },200)
     }else{
@@ -467,4 +473,19 @@ function outputAudio(element){
     audio.loop = false;
     console.log(audio);
     audioDiv.appendChild(audio);
+}
+
+function perfectAudio(element){
+    audioDiv.innerHTML="";
+    let audio = document.createElement("audio");
+    audio.autoplay="true";
+    element_parts = element.split(" ");
+    audio.src = "/audio/"+element;
+    audio.loop = false;
+    console.log(audio);
+    audioDiv.appendChild(audio);
+}
+
+function toggle_skeleton(){
+    flag_skeleton= !flag_skeleton;
 }
