@@ -100,13 +100,13 @@ function compareCos(imgcos,vidcos){
             if(i==2){
                 if(vidcos[2]>lowLimit && vidcos[2]<upLimit){ans[i]="left arm position is correct";}
                 else if(vidcos[2]<lowLimit){ans[i]="try moving your left arm away from body";}
-                else if(vidcos[2]>upLimit){ans[i]="try moving your left arm towards body";}
+                else if(vidcos[2]>upLimit){ans[i]="try moving your left arm closer to body";}
                 else{ans[i]="undetected"};
             }
             if(i==3){
                 if(vidcos[3]>lowLimit && vidcos[3]<upLimit){ans[i]="right arm position is correct";}
                 else if(vidcos[3]<lowLimit){ans[i]="try moving your right arm away from body";}
-                else if(vidcos[3]>upLimit){ans[i]="try moving your right arm towards body";}
+                else if(vidcos[3]>upLimit){ans[i]="try moving your right arm closer to body";}
                 else{ans[i]="undetected"};
             }
             if(i==4){
@@ -118,7 +118,7 @@ function compareCos(imgcos,vidcos){
             if(i==5){
                 if(vidcos[5]>lowLimit && vidcos[5]<upLimit){ans[i]="right arm alignment is correct";}
                 else if(vidcos[5]<lowLimit){ans[i]="try straightening your right arm";}
-                else if(vidcos[5]>upLimit){ans[i]="try bending your right elbow";}
+                else if(vidcos[5]>upLimit){ans[i]="try bending your right arm";}
                 else{ans[i]="undetected"};
             }
             if(i==6){
