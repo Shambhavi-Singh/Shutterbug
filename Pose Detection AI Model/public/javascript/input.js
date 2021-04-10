@@ -19,6 +19,29 @@ const corrected = document.getElementById("corrected");
 var cosinePairs=[[[11,13],[13,15]],[[12,14],[14,16]],[[7,5],[5,11]],[[12,6],[6,8]],[[5,7],[7,9]],[[6,8],[8,10]],[[3,4],[5,6]]];
 const captionList = document.getElementById("captionList");
 const audioDiv = document.getElementById("audioFile");
+//object for audio files:
+let audioFlag = false;
+const audioSelect = {left:
+    {arm:
+        {pos:
+            {correct:"left arm pos correct.mp3",away:"left arm pos away.mp3",closer:"left arm pos close.mp3"},
+        aln:
+            {correct:"left arm aln correct.mp3",straight:"left arm aln straighten.mp3",bend:"left arm aln bend.mp3"},
+        },
+    leg:
+        {correct:"left leg correct.mp3",straight:"left leg straighten.mp3",bend:"left leg bend.mp3"},
+    },
+    right:{
+        arm:
+            {pos:
+                {correct:"right arm pos correct.mp3",away:"right arm pos away.mp3",closer:"right arm pos close.mp3"},
+            aln:
+                {correct:"right arm aln correct.mp3",straight:"right arm aln straighten.mp3",bend:"right arm aln bend.mp3"},
+            },
+        leg:
+            {correct:"right leg correct.mp3",straight:"right leg straighten.mp3",bend:"right leg bend.mp3"},
+        },
+    }
 //undetected parts
 let undetected_parts = [];
 //iitx properties
@@ -166,6 +189,9 @@ function displayMessage(ans){
         if(!(element && element.split(" ").includes("correct"))){
             flag=1;
             message.innerHTML= element;
+            outputAudio(element);
+            audioFlag = true;
+            setTimeout(()=>{audioFlag=false},5000);
             return false;
          } //else{
         //     console.log("here");
@@ -177,7 +203,7 @@ function displayMessage(ans){
         return true;
         
     });
-    if(flag==0 && ans.length==7){
+    if(flag==0 && ans.length==5){
         message.innerHTML = "perfect";
         point++;
         if(point>20){
@@ -209,7 +235,6 @@ async function detectPose(imageElement){
         multiplier:1,
         });
         createSketeton(pose);
-        //outputAudio();
         window.cosValsImg=cosLines(pose);
 }
 
@@ -289,7 +314,7 @@ async function startTracking(){
                     });
                     //console.log(cosLines(pose));
                     //console.log(window.cosValsImg);
-                    compareCos(window.cosValsImg,cosLines(pose));
+                    if(!audioFlag) {compareCos(window.cosValsImg,cosLines(pose));}
                     //console.log(compareCos(window.cosValsImg,cosLines(pose)));
                     // ctx.beginPath();
                     // ctx.arc(640-pose.keypoints[0].position.x,pose.keypoints[0].position.y,3,0,2*Math.PI);
@@ -373,11 +398,69 @@ easyScrollDots({
     .catch(error => console.log(error))
   }
 
-function outputAudio(){
+function outputAudio(element){
     audioDiv.innerHTML="";
     let audio = document.createElement("audio");
     audio.autoplay="true";
-    audio.src="/audio/demo.mp3";
+    element_parts = element.split(" ");
+    audio.src = "/audio/"
+    if(element.includes("left")){
+        if(element.includes("arm")){
+            if(element.includes("body")){
+                if(element.includes("away")){
+                    audio.src += audioSelect.left.arm.pos.away
+                }else if(element.includes("close")){
+                    audio.src += audioSelect.left.arm.pos.closer;
+                }else{
+                    audio.src += audioSelect.left.arm.pos.correct;
+                }
+            }else{
+                if(element.includes("straight")){
+                    audio.src += audioSelect.left.arm.aln.straight;
+                }else if(element.includes("bend")){
+                    audio.src += audioSelect.left.arm.aln.bend;
+                }else{
+                    audio.src += audioSelect.left.arm.aln.correct
+                }
+            }
+        }else{
+            if(element.includes("staight")){
+                audio.src += audioSelect.left.leg.straight;
+            }else if(element.includes("bend")){
+                audio.src += audioSelect.left.leg.bend;
+            }else{
+                audio.src += audioSelect.left.leg.correct;
+            }
+        }
+    }else{
+        if(element.includes("arm")){
+            if(element.includes("body")){
+                if(element.includes("away")){
+                    audio.src += audioSelect.right.arm.pos.away
+                }else if(element.includes("close")){
+                    audio.src += audioSelect.right.arm.pos.closer;
+                }else{
+                    audio.src += audioSelect.right.arm.pos.correct;
+                }
+            }else{
+                if(element.includes("straight")){
+                    audio.src += audioSelect.right.arm.aln.straight;
+                }else if(element.includes("bend")){
+                    audio.src += audioSelect.right.arm.aln.bend;
+                }else{
+                    audio.src += audioSelect.right.arm.aln.correct
+                }
+            }
+        }else{
+            if(element.includes("staight")){
+                audio.src += audioSelect.right.leg.straight;
+            }else if(element.includes("bend")){
+                audio.src += audioSelect.right.leg.bend;
+            }else{
+                audio.src += audioSelect.right.leg.correct;
+            }
+        }
+    }
     audio.loop = false;
     console.log(audio);
     audioDiv.appendChild(audio);
