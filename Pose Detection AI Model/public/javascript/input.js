@@ -206,7 +206,7 @@ function displayMessage(ans){
         return true;
         
     });
-    if(flag==0 && ans.length==3){
+    if(flag==0 && ans.length>3){
         message.innerHTML = "perfect";
         point++;
         if(point>20){
