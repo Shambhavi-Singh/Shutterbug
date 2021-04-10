@@ -189,9 +189,12 @@ function displayMessage(ans){
         if(!(element && element.split(" ").includes("correct"))){
             flag=1;
             message.innerHTML= element;
-            outputAudio(element);
-            audioFlag = true;
-            setTimeout(()=>{audioFlag=false},5000);
+            // if(!audioFlag){
+            //     outputAudio(element);
+            //     audioFlag = true;
+            //     setTimeout(()=>{audioFlag=false},5000);
+            // }
+            
             return false;
          } //else{
         //     console.log("here");
@@ -203,7 +206,7 @@ function displayMessage(ans){
         return true;
         
     });
-    if(flag==0 && ans.length==5){
+    if(flag==0 && ans.length==3){
         message.innerHTML = "perfect";
         point++;
         if(point>20){
@@ -314,7 +317,7 @@ async function startTracking(){
                     });
                     //console.log(cosLines(pose));
                     //console.log(window.cosValsImg);
-                    if(!audioFlag) {compareCos(window.cosValsImg,cosLines(pose));}
+                    compareCos(window.cosValsImg,cosLines(pose));
                     //console.log(compareCos(window.cosValsImg,cosLines(pose)));
                     // ctx.beginPath();
                     // ctx.arc(640-pose.keypoints[0].position.x,pose.keypoints[0].position.y,3,0,2*Math.PI);
