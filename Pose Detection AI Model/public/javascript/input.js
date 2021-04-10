@@ -19,6 +19,8 @@ const corrected = document.getElementById("corrected");
 var cosinePairs=[[[11,13],[13,15]],[[5,11],[11,13]],[[5,11],[5,7]],[[5,7],[7,9]],[[6,8],[8,10]],[[6,12],[6,8]],[[12,14],[14,16]],[[6,12],[12,14]]];
 const captionList = document.getElementById("captionList");
 const audioDiv = document.getElementById("audioFile");
+//undetected parts
+let undetected_parts = [];
 //iitx properties
 
 //function to create a skeleton of input image:
@@ -33,17 +35,20 @@ function createSketeton(pose){
     const keypoints = pose.keypoints;
     iitx.beginPath();
     pair_to_connect.forEach(element =>{
+        if(keypoints[element[0]].score<0.7 || keypoints[element[1]].score<0.7) {console.log("here");return}
         iitx.moveTo(keypoints[element[0]].position.x,keypoints[element[0]].position.y);
-        iitx.lineTo(keypoints[element[1]].position.x,keypoints[element[1]].position.y)
+        iitx.lineTo(keypoints[element[1]].position.x,keypoints[element[1]].position.y);
     })
     iitx.strokeStyle = "white";
     iitx.stroke();
     for(let i=5;i<17;i++){
+        if(keypoints[i].score<0.7) {undetected_parts.push(keypoints[i].part);continue;};
         iitx.beginPath();
         iitx.arc(keypoints[i].position.x,keypoints[i].position.y,5,0,2*Math.PI);
         iitx.fillStyle = "#11ede6";
         iitx.fill();
     }
+    console.log(undetected_parts);
     
 }
 function cosLines(pose){
@@ -203,7 +208,7 @@ async function detectPose(imageElement){
         multiplier:1,
         });
         createSketeton(pose);
-        outputAudio();
+        //outputAudio();
         window.cosValsImg=cosLines(pose);
 }
 
