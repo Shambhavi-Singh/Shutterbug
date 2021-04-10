@@ -21,6 +21,7 @@ const captionList = document.getElementById("captionList");
 const audioDiv = document.getElementById("audioFile");
 //object for audio files:
 let audioFlag = false;
+let point=0;
 const audioSelect = {left:
     {arm:
         {pos:
@@ -189,11 +190,11 @@ function displayMessage(ans){
         if(!(element && element.split(" ").includes("correct"))){
             flag=1;
             message.innerHTML= element;
-            // if(!audioFlag){
-            //     outputAudio(element);
-            //     audioFlag = true;
-            //     setTimeout(()=>{audioFlag=false},5000);
-            // }
+            if(!audioFlag){
+                outputAudio(element);
+                audioFlag = true;
+                setTimeout(()=>{audioFlag=false},5000);
+            }
             
             return false;
          } //else{
@@ -206,7 +207,7 @@ function displayMessage(ans){
         return true;
         
     });
-    if(flag==0 && ans.length==3){
+    if(flag==0 && ans.length>=3){
         message.innerHTML = "perfect";
         point++;
         if(point>20){
