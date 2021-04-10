@@ -53,7 +53,7 @@ function createSketeton(pose){
 }
 function cosLines(pose){
   var cosVals=[];
-for(let i=0;i<=7;i++){
+for(let i=0;i<=6;i++){
   var slope=new Array();
   for(let j=0;j<=1;j++){
     if(pose.keypoints[cosinePairs[i][j][0]].score>0.70 && pose.keypoints[cosinePairs[i][j][1]].score>0.70){
@@ -88,54 +88,54 @@ function compareCos(imgcos,vidcos){
     for(let i=0;i<=5;i++){
         
         if(vidcos[i]!=NaN){
-            lowLimit=imgcos[i]-0.4
-            upLimit=imgcos[i]+0.4
+            lowLimit=imgcos[i]-0.5
+            upLimit=imgcos[i]+0.5
             if(i==0){
-                if(vidcos[0]>lowLimit && vidcos[0]<upLimit){ans[i]="left leg is correct";}
-                else if(vidcos[0]<lowLimit){ans[i]="try straightening your left leg";}
-                else if(vidcos[0]>upLimit){ans[i]="try bending your left leg";}
+                if(vidcos[0]>lowLimit && vidcos[0]<upLimit){ans[i]="right leg is correct";}
+                else if(vidcos[0]<lowLimit){ans[i]="try straightening your right1 leg";}
+                else if(vidcos[0]>upLimit){ans[i]="try bending your right leg";}
                 else{ans[i]="undetected"};
             }
             if(i==1){
-                if(vidcos[1]>lowLimit && vidcos[1]<upLimit){ans[i]="right leg is correct";}
-                else if(vidcos[1]<lowLimit){ans[i]="try straightening your right leg";}
-                else if(vidcos[1]>upLimit){ans[i]="try bending your right leg";}
+                if(vidcos[1]>lowLimit && vidcos[1]<upLimit){ans[i]="left leg is correct";}
+                else if(vidcos[1]<lowLimit){ans[i]="try straightening your left leg";}
+                else if(vidcos[1]>upLimit){ans[i]="try bending your left leg";}
                 else{ans[i]="undetected"};
             }
             if(i==2){
-                if(vidcos[2]>lowLimit && vidcos[2]<upLimit){ans[i]="left arm position is correct";}
-                else if(vidcos[2]<lowLimit){ans[i]="try moving your left arm away from body";}
-                else if(vidcos[2]>upLimit){ans[i]="try moving your left arm closer to body";}
+                if(vidcos[2]>lowLimit && vidcos[2]<upLimit){ans[i]="right arm position is correct";}
+                else if(vidcos[2]<lowLimit){ans[i]="try moving your right arm away from body";}
+                else if(vidcos[2]>upLimit){ans[i]="try moving your right arm closer to body";}
                 else{ans[i]="undetected"};
             }
             if(i==3){
-                if(vidcos[3]>lowLimit && vidcos[3]<upLimit){ans[i]="right arm position is correct";}
-                else if(vidcos[3]<lowLimit){ans[i]="try moving your right arm away from body";}
-                else if(vidcos[3]>upLimit){ans[i]="try moving your right arm closer to body";}
+                if(vidcos[3]>lowLimit && vidcos[3]<upLimit){ans[i]="left arm position is correct";}
+                else if(vidcos[3]<lowLimit){ans[i]="try moving your left arm away from body";}
+                else if(vidcos[3]>upLimit){ans[i]="try moving your left arm closer to body";}
                 else{ans[i]="undetected"};
             }
             if(i==4){
-                if(vidcos[4]>lowLimit && vidcos[4]<upLimit){ans[i]="left arm alignment is correct";}
-                else if(vidcos[4]<lowLimit){ans[i]="try straightening your left arm";}
-                else if(vidcos[4]>upLimit){ans[i]="try bending your left arm";}
+                if(vidcos[4]>lowLimit && vidcos[4]<upLimit){ans[i]="right arm alignment is correct";}
+                else if(vidcos[4]<lowLimit){ans[i]="try straightening your right arm";}
+                else if(vidcos[4]>upLimit){ans[i]="try bending your right arm";}
                 else{ans[i]="undetected"};
             }
             if(i==5){
-                if(vidcos[5]>lowLimit && vidcos[5]<upLimit){ans[i]="right arm alignment is correct";}
-                else if(vidcos[5]<lowLimit){ans[i]="try straightening your right arm";}
-                else if(vidcos[5]>upLimit){ans[i]="try bending your right arm";}
+                if(vidcos[5]>lowLimit && vidcos[5]<upLimit){ans[i]="left arm alignment is correct";}
+                else if(vidcos[5]<lowLimit){ans[i]="try straightening your left arm";}
+                else if(vidcos[5]>upLimit){ans[i]="try bending your left arm";}
                 else{ans[i]="undetected"};
             }
             if(i==6){
                 if(vidcos[6]>lowLimit && vidcos[6]<upLimit){ans[i]="face  is correct";}
-                else if(vidcos[6]<lowLimit){ans[i]="face left";}
-                else if(vidcos[6]>upLimit){ans[i]="face right";}
+                else if(vidcos[6]<lowLimit){ans[i]="face right";}
+                else if(vidcos[6]>upLimit){ans[i]="face left";}
                 else{ans[i]="undetected"};
             }
             // if(i==7){
-            //     if(vidcos[7]>lowLimit && vidcos[7]<upLimit){ans[i]="right leg angle from body is correct";}
-            //     else if(vidcos[7]<lowLimit){ans[i]="try bending your right thigh towards body";}
-            //     else if(vidcos[7]>upLimit){ans[i]="try moving your right thigh away from body";}
+            //     if(vidcos[7]>lowLimit && vidcos[7]<upLimit){ans[i]="left leg angle from body is correct";}
+            //     else if(vidcos[7]<lowLimit){ans[i]="try bending your left thigh towards body";}
+            //     else if(vidcos[7]>upLimit){ans[i]="try moving your left thigh away from body";}
             //     else{ans[i]="undetected"};
             // }
             if(ans[i] && ans[i].split(" ").includes("correct")){
