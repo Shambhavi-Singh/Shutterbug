@@ -309,7 +309,6 @@ async function startTracking(){
             imageElement.onload = async ()=>{
                     let pose = await net.estimateSinglePose(imageElement, {
                     architecture: 'MobileNetV1',
-                    flipHorizontal: true,
                     outputStride: 16,
                     quantBytes: 2,
                     inputResolution: 500,
@@ -326,8 +325,8 @@ async function startTracking(){
                     ctx.beginPath();
                     pair_to_connect.forEach(element =>{
                         if(keypoints[element[0]].score>0.7 && keypoints[element[1]].score>0.7){
-                            ctx.moveTo(keypoints[element[0]].position.x,keypoints[element[0]].position.y);
-                            ctx.lineTo(keypoints[element[1]].position.x,keypoints[element[1]].position.y)
+                            ctx.moveTo(640-keypoints[element[0]].position.x,keypoints[element[0]].position.y);
+                            ctx.lineTo(640-keypoints[element[1]].position.x,keypoints[element[1]].position.y)
                         }
                     })
                     ctx.strokeStyle = "white";
@@ -335,7 +334,7 @@ async function startTracking(){
                     for(let i=5;i<17;i++){
                         if(keypoints[i].score>0.7 && keypoints[i].score>0.7){
                             ctx.beginPath();
-                            ctx.arc(keypoints[i].position.x,keypoints[i].position.y,5,0,2*Math.PI);
+                            ctx.arc(640-keypoints[i].position.x,keypoints[i].position.y,5,0,2*Math.PI);
                             ctx.fillStyle = "#11ede6";
                             ctx.fill();
                         }
