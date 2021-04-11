@@ -45,6 +45,9 @@ button:hover{
  
   box-shadow: 3px 3px 0 0 palevioletred;
 }
+/* #section5{
+
+} */
 
 .circle1{
     display:block;
@@ -135,7 +138,15 @@ section{
   padding:5.5%;
 }
 #section1{
-  padding-top: 160px;
+  padding-top: 10px;
+  padding-left: 200px;
+}
+#section1 img{
+  width:60vw;
+  z-index:-1;
+  position: absolute;
+  left:50px;
+  top:150px;
 }
 #section2{
   color: rgb(165, 45, 165);
@@ -143,6 +154,16 @@ section{
 }
 #section2 span{
   font-size: 25px;
+  margin-left:530px;
+  margin-top: 210px;
+}
+#uploadimg{
+  width:40vw;
+  object-fit: cover;
+  position:absolute;
+  z-index:0;
+  top: 820px;
+
 }
 #section4{
   background-color: thistle;;
@@ -151,6 +172,15 @@ section{
   
   height:65vh;
   
+}
+#imageCanvas{
+  margin-left: 530px;
+}
+#section3{
+  padding:100px;
+}
+#section2 input{
+  margin-left: 530px;
 }
 #section4 img{
   width: 70vw;

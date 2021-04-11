@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     
-    <title>Document</title>
+    <title>Shutterbug</title>
 </head>
 <body>
     <div>
@@ -18,9 +18,9 @@
     </div>
     <section id="section1">
         
-            <h1>SayCheese.io</h1>
+            <h1>Shutterbug</h1>
             <p>AI trained application to help you pose for pictures.</p>
-        
+            <img src="/images/photo1.jpg"></img>
     </section>
     <div>
         <div class="scroll-indicator" id="section02" data-scroll-indicator-title="Upload Image"></div>
@@ -39,11 +39,12 @@
                 <canvas id="image_output"></canvas>
             </div>
         </div>
+        <img id="uploadimg"src="/images/photo2.jpg"></img>
     </section>
     <div>
         <div class="scroll-indicator" id="section03" data-scroll-indicator-title="Video Interface"></div>
     </div>
-    <section id="section3" style="padding: 0;">
+    <section id="section3">
         <video autoplay style="display: none;"></video>
         <div style="display: flex;">
             <div>
@@ -52,7 +53,7 @@
                 <canvas style="display: none;" id="videoCanvas"></canvas>
                 <p id="message"></p>
                 <p id="undetected"></p>
-                <button onclick="toggle_skeleton()">Toggle skeleton</button>
+                <button onclick="toggle_skeleton()">Toggle skeleton</button>              
                 <button onclick="startTracking()">Start Tracing</button>
                 <button onclick="stopTracking()">Stop Tracing</button>
                 <button onclick="face_capture()">Face capture</button>
