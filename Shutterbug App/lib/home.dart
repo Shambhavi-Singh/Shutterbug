@@ -1,4 +1,45 @@
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'captionclass.dart';
+List<Captions> captions;
+Future<List<Captions>> getCaptions() async //to get the description model of the image the user wants to mimick
+    {
+  final String url = "https://type.fit/api/quotes";
+  Uri myUri = Uri.parse(url);
+  final response = await http.get(myUri);
+  if (response.statusCode == 200) {
+    print(response.body);
+    return captionsFromJson(response.body);
+  } else {
+    print(response.statusCode);
+    return null;
+  }
+}
+Future<void> getterCaption() async{
+
+  captions= await getCaptions();
+}
+final List<String> photos=['assets/modelPhotos/pose0.jpg',
+  'assets/modelPhotos/pose1.jpg',
+  'assets/modelPhotos/pose2.jpg',
+  'assets/modelPhotos/pose3.jpg',
+  'assets/modelPhotos/pose4.jpg',
+  'assets/modelPhotos/pose5.jpg',
+  'assets/modelPhotos/pose6.jpg',
+  'assets/modelPhotos/pose7.jpg',
+  'assets/modelPhotos/pose8.jpg',
+  'assets/modelPhotos/pose9.jpeg',
+  'assets/modelPhotos/pose10.jpeg',
+  'assets/modelPhotos/pose11.jpeg',
+  'assets/modelPhotos/pose12.jpg',
+  'assets/modelPhotos/pose13.jpg',
+  'assets/modelPhotos/pose14.jpg',
+  'assets/modelPhotos/pose15.jpg',
+  'assets/modelPhotos/pose16.jpeg',
+  'assets/modelPhotos/pose17.jpeg',
+  'assets/modelPhotos/pose18.jpg',
+];
 final List<String> entries = ['Whatever is good for your soul, do that',
   'Even the stars were jealous of the sparkle in her eyes',
   'Stress less and enjoy the best',

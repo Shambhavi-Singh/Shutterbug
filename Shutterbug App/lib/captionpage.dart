@@ -14,6 +14,12 @@ class CaptionPage extends StatefulWidget {
 
 class _CaptionPageState extends State<CaptionPage> {
   @override
+  void initState()  {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -42,7 +48,7 @@ class _CaptionPageState extends State<CaptionPage> {
               margin: EdgeInsets.only(top: 70.0),
               child: ListView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: entries.length,
+                  itemCount: captions.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
@@ -51,7 +57,7 @@ class _CaptionPageState extends State<CaptionPage> {
                           MaterialPageRoute(
                               builder: (context) => SharePage(
                                   photo: widget.photo,
-                                  caption: entries[index])),
+                                  caption: captions[index].text)),
                         );
                       },
                       child: Container(
@@ -62,7 +68,7 @@ class _CaptionPageState extends State<CaptionPage> {
                         )),
                         child: DefaultTextStyle(
                           child: Text(
-                            entries[index],
+                            captions[index].text,
                             textScaleFactor: 1.8,
                           ),
                           style: TextStyle(

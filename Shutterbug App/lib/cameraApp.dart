@@ -248,6 +248,7 @@ class _CameraAppState extends State<CameraApp> {
             padding: EdgeInsets.all(20.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                primary: Color(0xFFBDAED4),
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
                 ),
@@ -299,18 +300,19 @@ class _CameraAppState extends State<CameraApp> {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                getImage();
-              },
-            ),
-          ),
-        ),
+
       ],
     );
   }
 }
+// Align(
+// alignment: Alignment.bottomRight,
+// child: Padding(
+// padding: EdgeInsets.all(20.0),
+// child: FloatingActionButton(
+// onPressed: () {
+// getImage();
+// },
+// ),
+// ),
+// ),
