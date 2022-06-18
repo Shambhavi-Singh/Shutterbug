@@ -1,22 +1,26 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-  
-<head>
-    <title>Home Page</title> 
-    <link rel="stylesheet" href="/stylesheet/video.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+<!DOCTYPE html>
+<html lang="en">
+  <!-- hello -->
+  <head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/stylesheet/video.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
-    
-</head> 
-  
-<body> 
+  </head>
+
+  <body>
     <h1>Video</h1>
     <video autoplay></video>
-    <canvas style="display:none;" id="c"></canvas>
-    <p class="up"><span class="left"></span> <br> <span class="right"></span></p>
+    <canvas style="display: none" id="c"></canvas>
+    <p class="up">
+      <span class="left"></span> <br />
+      <span class="right"></span>
+    </p>
     <button class="start">screenhot capture</button>
     <button class="datasend">send data</button>
-    <script type="text/javascript" src="/javascript/videoProcessing.js"></script>
-</body> 
-  
-</html>   
+    <script
+      type="text/javascript"
+      src="/javascript/videoProcessing.js"
+    ></script>
+  </body>
+</html>
