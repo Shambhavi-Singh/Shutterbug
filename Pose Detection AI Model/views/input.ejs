@@ -46,24 +46,52 @@
     </div>
     <section id="section3">
         <video autoplay style="display: none;"></video>
-        <div style="display: flex;">
-            <div>
-                <button onclick="takeVideoInput()">Open Video</button>
-                <button onclick="closeVideoInput()">Close Video</button>
-                <canvas style="display: none;" id="videoCanvas"></canvas>
-                <p id="message"></p>
-                <p id="undetected"></p>
-                <button onclick="toggle_skeleton()">Toggle skeleton</button>              
-                <button onclick="startTracking()">Start Tracing</button>
-                <button onclick="stopTracking()">Stop Tracing</button>
-                <button onclick="face_capture()">Face capture</button>
-                <ul id="corrected"></ul>
+        <div class="section3-svg-container">
+                <img src="/images/svg1.png" alt="" class="section3-background-svg section3-top-left top-left">
+                <img src="/images/svg2.png" alt="" class="section3-background-svg section3-top-right top-right">
+                <img src="/images/svg3.png" alt="" class="section3-background-svg section3-bottom-left bottom-left">
+                <img src="/images/svg4.png" alt="" class="section3-background-svg section3-bottom-right bottom-right">
+        </div>
+        <div class="section3-container">
+            <div class="section3-parent">
+                <div>
+                    <div class="section3-button-container top-buttons">
+                        <button onclick="takeVideoInput()">Open Video</button>
+                        <button onclick="closeVideoInput()">Close Video</button>
+                    </div>
+                    <div class="section3-canvas-container">
+                        <div class="section3-canvas-placeholder">
+                            <img src="/images/click-to-start-video.png" alt="An blurred placeholder image" class="section3-blurred-image section3-pink-rounded-borders">
+                        </div>
+                        <canvas style="display: none;" id="videoCanvas" class="section3-pink-rounded-borders"></canvas>
+                    </div>
+                    <p id="message" class="section3-centered-text">Suggestions will be displayed here</p>
+                    <p id="undetected"></p>
+                    <div class="section3-button-container">
+                        <button onclick="toggle_skeleton()">Toggle skeleton</button>              
+                        <button onclick="startTracking()">Start Tracing</button>
+                        <button onclick="stopTracking()">Stop Tracing</button>
+                        <button onclick="face_capture()">Face capture</button>
+                    </div>
+                    <ul id="corrected"></ul>
+                </div>
+                <div>
+                    <div class="section3-button-container">
+                        <button onclick="" style="visibility:hidden;">Just a hack</button>
+                    </div>
+                    <div class="section3-canvas-container">
+                        <div class="section3-canvas-placeholder">
+                            <img src="/images/preview-image-placeholder.png" alt="An blurred placeholder image" class="section3-blurred-image section3-pink-rounded-borders">
+                        </div>
+                        <canvas id="download" class="section3-pink-rounded-borders"></canvas>
+                    </div>
+                    <p id="face" class="visibility" style="visibility:hidden;">Please remember to handle me if you add emotion recognition<p>
+                    <div class="section3-button-container section3-download-button">
+                        <a href="" download="FILENAME.jpg" id="link"><button>download</button></a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <canvas id="download"></canvas>
-                <a href="" download="FILENAME.jpg" id="link"><button>download</button></a>
-                <p id="face"></p>
-            </div>
+
         </div>
         
         

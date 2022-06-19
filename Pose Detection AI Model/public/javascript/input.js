@@ -405,6 +405,7 @@ easyScrollDots({
           },
         body: JSON.stringify(data)
     };
+    // be carefull changing the 'face' element... you also have to change the visibility
 
     fetch(URL,otherParam)
     .then(data=>{return data.json()})

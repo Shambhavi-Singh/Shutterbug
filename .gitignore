@@ -104,3 +104,10 @@ dist
 # TernJS port file
 .tern-port
 ./Pose Detection AI Model/package.json
+
+# ignore vim session file 
+./Pose Detection AI Model/Session.vim
+*.vim
+
+#ignore nodemon.config 
+nodemon.json

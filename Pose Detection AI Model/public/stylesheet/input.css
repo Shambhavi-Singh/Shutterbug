@@ -176,9 +176,6 @@ section{
 #imageCanvas{
   margin-left: 530px;
 }
-#section3{
-  padding:100px;
-}
 #section2 input{
   margin-left: 530px;
 }
@@ -275,3 +272,115 @@ section{
     color: white;
     
   }
+
+
+
+
+
+/* section3 styling here */
+
+#section3{
+    position: relative;
+    padding: 0px;
+    /* background: palevioletred; */
+    /* background: radial-gradient(circle, palevioletred 0%, white 100%); */
+}
+.section3-container{
+    z-index:2;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width:100%;
+    height: 100%;
+}
+.section3-parent{
+    display: flex;
+}
+.section3-parent > div{
+    border: 2px solid palevioletred;
+    margin: 2px;
+    border-radius: 10px;
+}
+.section3-canvas-container{
+    position: relative;
+    width: 640px;
+    height: 360px;
+}
+.section3-canvas-placeholder{
+    position: absolute;
+    top:0;
+    left:0;
+    margin:0.5rem;
+    width:calc(100% - 1rem);
+    height: calc(100% - 1rem);
+}
+#videoCanvas,#download{
+    position: absolute;
+    top:0;
+    left:0;
+    margin:0.5rem;
+    width:calc(100% - 1rem);
+    height: calc(100% - 1rem);
+}
+
+/*button containers to get aligned buttons*/
+.section3-button-container{
+    display:flex;
+    justify-content: space-between;
+}
+.section3-button-container.top-buttons{
+    justify-content: space-between;
+}
+.section3-button-container.section3-download-button{
+    justify-content:center;
+}
+
+/* section 3 blurred images */
+.section3-blurred-image{
+    width:100%;
+    height:100%;
+}
+
+/* definiting borders for section 3  */
+.section3-pink-rounded-borders{
+    border: 2px solid palevioletred;
+    border-radius: 10px;
+}
+
+/* centered text for messages */
+.section3-centered-text{
+    text-align: center;
+}
+
+/* code for section3 svg container */
+
+.section3-svg-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.section3-background-svg{
+    z-index: -1;
+    position: absolute;
+    height: 20%;
+}
+.section3-bottom-left{
+    height:15%;
+}
+.top-left{
+    top:0;
+    left:0;
+}
+.top-right{
+    top:0;
+    right:0;
+}
+.bottom-left{
+    bottom:0;
+    left:0;
+}
+.bottom-right{
+    bottom:0;
+    right:0;
+}
